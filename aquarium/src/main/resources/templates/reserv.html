@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>예약페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+          crossorigin="anonymous">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <style>
+        .program-img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+        .contents {
+            flex: 2;
+            margin-right: 20px;
+        }
+        .reserveSection {
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header></header>
+
+    <div class="container mt-5">
+        <div class="contents">
+            <div class="imgSection">
+                <img id="programImage" src="default.jpg" alt="프로그램 이미지" class="program-img">
+            </div>
+            <div class="description">
+                <h2 id="programTitle">프로그램 제목</h2>
+                <p id="programDescription">프로그램 설명이 여기에 작성됩니다.</p>
+            </div>
+        </div>
+        <div class="reserveSection">
+            <form method="post">
+                <input type="date" id="reservDate">
+                <div class="adultSection">
+                    <h5>성인</h5>
+                    <div class="countBtnSection">
+                        <button type="button" onclick="decreasAdultCount()">-</button>
+                        <input type="number" id="adultCount" value="1" required>
+                        <button type="button" onclick="increasAdultCount()">+</button>
+                        
+                    </div>
+                    <span id="adultPrice">0원</span>
+                </div>
+                <div class="childSection">
+                    <h5>어린이</h5>
+                    <div class="countBtnSection">
+                        <button type="button" onclick="decreasChildCount()">-</button>
+                        <input type="number" id="childCount" value="0" required>
+                        <button type="button" onclick="increasChildCount()">+</button>
+                    </div>
+                    <span id="childPrice">0원</span>
+                </div>
+                <div class="totalPrice">
+                    <h5>총 금액: <span id="totalPrice">0원</span></h5>
+                </div>
+                <button onclick="return payment()">결제하기</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var programAdultPrice = 0;
+        var programChildPrice = 0;
+
+        // 날짜 선택
+        $(document).ready(function() {
+            // 오늘 날짜 구하기
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+            const day = String(today.getDate()).padStart(2, '0');
+
+            // 오늘 날짜를 YYYY-MM-DD 형식으로 변환
+            const minDate = `${year}-${month}-${day}`;
+
+            // input 요소에 최대 날짜 설정
+            $('#reservDate').attr('min', minDate);
+        });
+
+        // 성인 수 증가
+        function increasAdultCount() {
+            var adult = $("#adultCount");
+            var currentAdultCount = parseInt(adult.val());
+            if (currentAdultCount < 9) {
+                adult.val(currentAdultCount + 1);
+            }
+            updateAdultPrice();
+            updateTotalPrice();
+        }
+
+        // 성인 수 감소
+        function decreasAdultCount() {
+            var adult = $("#adultCount");
+            var currentAdultCount = parseInt(adult.val());
+            if (currentAdultCount > 0) {
+                adult.val(currentAdultCount - 1);
+            }
+            updateAdultPrice();
+            updateTotalPrice();
+        }
+
+        // 어린이 수 증가
+        function increasChildCount() {
+            var child = $("#childCount");
+            var currentChildCount = parseInt(child.val());
+            if (currentChildCount < 9) {
+                child.val(currentChildCount + 1);
+            }
+            updateChildPrice();
+            updateTotalPrice();
+        }
+
+        // 어린이 수 감소
+        function decreasChildCount() {
+            var child = $("#childCount");
+            var currentChildCount = parseInt(child.val());
+            if (currentChildCount > 0) {
+                child.val(currentChildCount - 1);
+            }
+            updateChildPrice();
+            updateTotalPrice();
+        }
+
+        // 성인 총 가격 업데이트
+        function updateAdultPrice() {
+            var adultCount = parseInt($("#adultCount").val());
+            var adultPrice = adultCount * programAdultPrice;
+            $("#adultPrice").text(adultPrice + "원");
+        }
+
+        // 어린이 총 가격 업데이트
+        function updateChildPrice() {
+            var childCount = parseInt($("#childCount").val());
+            var childPrice = childCount * programChildPrice;
+            $("#childPrice").text(childPrice + "원");
+        }
+
+        // 총 가격 업데이트
+        function updateTotalPrice() {
+            var adultCount = parseInt($("#adultCount").val());
+            var childCount = parseInt($("#childCount").val());
+            var totalPrice = (adultCount * programAdultPrice) + (childCount * programChildPrice);
+            $("#totalPrice").text(totalPrice + "원");
+        }
+
+        // 결제하기 알림창
+        function payment() {
+            const reservDate = $('#reservDate').val();
+            if(reservDate == "") {
+                alert("예약날짜를 선택해주세요");
+                return false;
+            }
+            var adultCount = parseInt($("#adultCount").val());
+            var childCount = parseInt($("#childCount").val());
+            var totalPrice = ($("#totalPrice").text());
+            alert("예약날짜 " + reservDate + " 성인 " + adultCount + "명, 어린이 " + childCount + "명 총 금액 " + totalPrice + " 결제되었습니다.");
+        }
+
+        // URL 파라미터를 읽어오는 함수
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // 예약 페이지가 로드될 때 프로그램 정보 업데이트
+        window.onload = function() {
+            const program = getParameterByName('program'); // key=program, value=aquarium, scuba, feed
+            const programs = {
+                aquarium: {
+                    img: 'aquarium.jpg',
+                    title: '아쿠아리움 입장권',
+                    description: '아쿠아리움 입장권 설명입니다.',
+                    adultPrice: 10000,
+                    childPrice: 5000,
+                },
+                scuba: {
+                    img: 'scuba.avif',
+                    title: '아쿠아리움 입장권 + 스킨스쿠버 체험',
+                    description: '스킨스쿠버 체험 프로그램 설명입니다.',
+                    adultPrice: 30000,
+                    childPrice: 15000
+                },
+                feeding: {
+                    img: 'feed.jpg',
+                    title: '아쿠아리움 입장권 + 동물 먹이주기 체험',
+                    description: '동물 먹이주기 체험 설명입니다.',
+                    adultPrice: 20000,
+                    childPrice: 10000
+                }
+            };
+
+            if (programs[program]) {
+                $("#programImage").attr("src", programs[program].img);
+                $("#programTitle").text(programs[program].title);
+                $("#programDescription").text(programs[program].description);
+                programAdultPrice = programs[program].adultPrice;
+                programChildPrice = programs[program].childPrice;
+                // 로드되자마자 가격 업데이트 시키기
+                updateAdultPrice();
+                updateChildPrice();
+                updateTotalPrice();
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+            crossorigin="anonymous">
+    </script>
+    <footer></footer>
+</body>
+</html>
