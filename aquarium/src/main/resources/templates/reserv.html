@@ -114,6 +114,9 @@
         .welcomeMsg{
             display:none;
         }
+        .hidden{
+        	display:none;
+        }
     </style>
     <header>
         <nav class="navform navbar navbar-expand-lg bg-body-tertiary">
@@ -190,34 +193,36 @@
             </div>
         </div>
         <div class="reserveSection">
-            <form method="post">
-                <h4 id="programTitle">프로그램 제목</h4>
-                <input type="date" id="reservDate" class="form-control">
-                <div class="adultSection mt-3">
-                    <h5>성인</h5>
-                    <div class="countBtnSection">
-                        <button type="button" onclick="decreasAdultCount()">-</button>
-                        <input type="number" id="adultCount" value="1" required>
-                        <button type="button" onclick="increasAdultCount()">+</button>
-                    </div>
-                    <br>
-                    <span id="adultPrice">0원</span>
-                </div>
-                <div class="childSection mt-3">
-                    <h5>어린이</h5>
-                    <div class="countBtnSection">
-                        <button type="button" onclick="decreasChildCount()">-</button>
-                        <input type="number" id="childCount" value="0" required>
-                        <button type="button" onclick="increasChildCount()">+</button>
-                    </div>
-                    <br>
-                    <span id="childPrice">0원</span>
-                </div>
-                <div class="totalPrice mt-3">
-                    <h5>총 금액: <span id="totalPrice">0원</span></h5>
-                </div>
-                <button type="submit" onclick="return payment()">결제하기</button>
-            </form>
+            <form method="post" action="/reserve">
+			    <h4 id="programTitle">프로그램 제목</h4>
+			    <input class="hidden" type="text" id="programNo" name="programNo"><!-- programNo 데이터 값을 보내야하는데 form안에 해당 input 태그가 없음  -->
+			    <input type="date" id="reservDate" name="reservDate" class="form-control">
+			    <div class="adultSection mt-3">
+			        <h5>성인</h5>
+			        <div class="countBtnSection">
+			            <button type="button" onclick="decreasAdultCount()">-</button>
+			            <input type="number" id="adultCount" name="adultCount" value="1" required>
+			            <button type="button" onclick="increasAdultCount()">+</button>
+			        </div>
+			        <br>
+			        <span id="adultPrice">0원</span>
+			    </div>
+			    <div class="childSection mt-3">
+			        <h5>어린이</h5>
+			        <div class="countBtnSection">
+			            <button type="button" onclick="decreasChildCount()">-</button>
+			            <input type="number" id="childCount" name="childCount" value="0" required>
+			            <button type="button" onclick="increasChildCount()">+</button>
+			        </div>
+			        <br>
+			        <span id="childPrice">0원</span>
+			    </div>
+			    <div class="totalPrice mt-3">
+			        <h5>총 금액: <span id="reservTotalPrice">0원</span></h5>
+			        <input class="hidden" type="number" id="reservTotalPriceInput" name="reservTotalPrice">
+			    </div>
+			    <button type="submit" onclick="return payment()">결제하기</button>
+			</form>
         </div>
     </div>
 
@@ -298,7 +303,8 @@
             var adultCount = parseInt($("#adultCount").val());
             var childCount = parseInt($("#childCount").val());
             var totalPrice = (adultCount * programAdultPrice) + (childCount * programChildPrice);
-            $("#totalPrice").text(totalPrice + "원");
+            $("#reservTotalPrice").text(totalPrice + "원");
+            $("#reservTotalPriceInput").val(totalPrice);
         }
 
         // URL 파라미터를 읽어오는 함수
@@ -313,6 +319,7 @@
             const programs = {
                 aquarium: {
                     img: 'aquarium.jpg',
+                    programNo: 'P1',
                     title: '아쿠아리움 입장권',
                     description: '아쿠아리움 입장권 설명입니다.',
                     adultPrice: 10000,
@@ -320,6 +327,7 @@
                 },
                 scuba: {
                     img: 'scuba.avif',
+                    programNo: 'P2',
                     title: '아쿠아리움 입장권 + 스킨스쿠버 체험',
                     description: '스킨스쿠버 체험 프로그램 설명입니다.',
                     adultPrice: 30000,
@@ -327,6 +335,7 @@
                 },
                 feeding: {
                     img: 'feed.jpg',
+                    programNo: 'P3',
                     title: '아쿠아리움 입장권 + 동물 먹이주기 체험',
                     description: '동물 먹이주기 체험 설명입니다.',
                     adultPrice: 20000,
@@ -336,12 +345,15 @@
 
             if (programs[program]) {
                 $("#programImage").attr("src", programs[program].img);
+                //$("#programNo").text(programs[program].programNo); <!-- programNo의 input태그에 값을 넣어줘야함. input태그라 text로 넣어주는것이 아니라 val로 넣어줘야함  -->
+                $("#programNo").val(programs[program].programNo);
                 $("#programTitle").text(programs[program].title);
                 $("#programDescription").text(programs[program].description);
                 programAdultPrice = programs[program].adultPrice;
                 programChildPrice = programs[program].childPrice;
                 updateAdultPrice();
                 updateChildPrice();
+                
             }
         }
 
@@ -354,8 +366,9 @@
             }
             var adultCount = parseInt($("#adultCount").val());
             var childCount = parseInt($("#childCount").val());
-            var totalPrice = ($("#totalPrice").text());
-            alert("예약날짜 " + reservDate + " 성인 " + adultCount + "명, 어린이 " + childCount + "명 총 금액 " + totalPrice + " 결제되었습니다.");
+            var reservTotalPrice = ($("#reservTotalPrice").text());
+            alert("예약날짜 " + reservDate + " 성인 " + adultCount + "명, 어린이 " + childCount + "명 총 금액 " + reservTotalPrice + " 결제되었습니다.");
+            return true;
         }
     </script>
 

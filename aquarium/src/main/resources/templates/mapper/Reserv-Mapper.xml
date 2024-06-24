@@ -2,3 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.camel.project.mapper.ReserveMapper">
+	<insert id="insertReserve" parameterType="com.camel.project.dto.Reserve">
+        INSERT INTO RESERV (reserv_no, member_id, program_no, reserv_total_count, child_count, adult_count, reserv_total_price, reserv_date, reserv_cancle, reserv_exprt) 
+        VALUES (reserv_seq.nextval, #{memberId}, #{programNo}, #{adultCount} + #{childCount}, #{childCount}, #{adultCount}, #{reservTotalPrice}, #{reservDate}, #{reservCancle}, #{reservExprt})
+    </insert>
+</mapper>
