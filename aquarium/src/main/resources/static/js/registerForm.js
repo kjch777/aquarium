@@ -1,6 +1,6 @@
 
 //아이디 중복검사
-function idDupl(){
+/*function idDupl(){
 
     var id = $("#memberId").val();
     var idRegExp = /^[a-z0-9A-Z]{5,50}$/;
@@ -21,7 +21,7 @@ function idDupl(){
         $("#idDupl").text("사용 가능한 아이디입니다.").css("color", "green");
         return true;
     }
-}
+}*/
 
 //비밀번호 일치 확인
 function pwSame(){
@@ -113,7 +113,7 @@ $(document).ready(function(){
     //폼 제출 유효성 검사
     $("#registerForm").submit(function(event) {
 
-        var isIdValid = idDupl();
+   //   var isIdValid = idDupl();
         var isPwValid = pwSame();
         var isNameValid = $("#memberName").val() !== "" && /^[가-힣]{2,5}$/.test($("#memberName").val()); // 이름 검증 추가
         var isPwRegExpValid = $("#memberPw").val() !== "" && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test($("#memberPw").val());
@@ -126,7 +126,7 @@ $(document).ready(function(){
         console.log(isIdRegExpValid);
 
         // 모든 조건이 충족되었는지 확인
-        if (isIdValid && isPwValid && isNameValid && isPwRegExpValid && isIdRegExpValid) {
+        if (isPwValid && isNameValid && isPwRegExpValid && isIdRegExpValid) {
 
             // 모든 조건이 충족되었을 때 폼 제출 허용
             window.location.replace("/login.html");

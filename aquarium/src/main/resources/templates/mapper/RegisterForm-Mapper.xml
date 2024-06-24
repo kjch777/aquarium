@@ -7,4 +7,9 @@
         INSERT INTO member (memberNo, memberId, memberPw, memberEmail, memberName, memberBirth, memberPhone)
         VALUES(memberNo_seq.NEXTVAL, #{memberId}, #{memberPw}, #{memberEmail}, #{memberName}, #{memberBirth}, #{memberPhone})
     </insert>
+    
+   <select id="getId" resultType="com.camel.project.dto.RegisterForm" parameterType="String">
+		select count(*) from member
+		where memberId = #{memberId}
+	</select>
 </mapper>

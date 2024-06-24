@@ -15,4 +15,9 @@ public class RegisterFormService {
 	public void insertMember(RegisterForm registerForm) {
 		registerFormMapper.insertMember(registerForm);
 	}
+	
+	public RegisterForm getId(String memberId) {
+		
+		return registerFormMapper.getId(memberId);
+	}
 }
