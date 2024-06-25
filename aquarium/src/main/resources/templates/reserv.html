@@ -121,66 +121,66 @@
     <header>
         <nav class="navform navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="home.html">
-                <img src="pngegg.png" alt="logoImage" style="width: 210px;">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <a class="navbar-brand" href="/main">
+                <img src="/image/pngegg.png" alt="logoImage" style="width: 210px;">
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                    </svg>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                  </svg>
+              </button>
+              <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown mr-5">
+                  <li class="nav-item dropdown mr-5">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        방문 전 정보
+                      방문 전 정보
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">이용안내</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">공지사항</a></li>
+                      <li><a class="dropdown-item" href="/usageguide">이용안내</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">공지사항</a></li>
                     </ul>
-                    </li>
-                    <li class="nav-item dropdown mr-5">
+                  </li>
+                  <li class="nav-item dropdown mr-5">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        아쿠아리움 소개
+                      아쿠아리움 소개
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">전시생물 소개</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">프로그램 소개</a></li>
+                      <li><a class="dropdown-item" href="#">전시생물 소개</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">프로그램 소개</a></li>
                     </ul>
-                    </li>
-                    <li class="nav-item dropdown mr-5">
+                  </li>
+                  <li class="nav-item dropdown mr-5">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        온라인 예매
+                      온라인 예매
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">예약하기</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">예약확인</a></li>
+                      <li><a class="dropdown-item" href="/program">예약하기</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/reserveConfirm">예약확인</a></li>
                     </ul>
-                    </li>
-                    <li class="nav-item dropdown mr-5">
+                  </li>
+                  <li class="nav-item dropdown mr-5">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        굿즈샵
+                      굿즈샵
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">구매하기</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">구매정보</a></li>
+                      <li><a class="dropdown-item" href="#">구매하기</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">구매정보</a></li>
                     </ul>
-                    </li>
+                  </li>
+                </ul>
+              </div>
+              <div th:if="${session.loginSession == null}" class="ml-auto">
+                <a href="login.html" class="/login">로그인</a>
                 </div>
-                <div class="ml-auto">
-                <a href="login.html" class="login">로그인</a>
+              <div th:if="${session.loginSession != null}" class="ml-auto welcomeMsg">
+                    <span th:text="${session.loginSession.member_name}+'님, 환영합니다.'"></span>
                 </div>
-                <div class="ml-auto welcomeMsg">
-                    <span id="username"></span>
-                </div>
-                </div>
-            </div>  
-            </nav>
+              </div>  
+          </nav>
     </header>
 
     <div class="reserveContainer mt-5">
@@ -318,7 +318,7 @@
             const program = getParameterByName('program');
             const programs = {
                 aquarium: {
-                    img: 'aquarium.jpg',
+                    img: '/img/aquarium.jpg',
                     programNo: 'P1',
                     title: '아쿠아리움 입장권',
                     description: '아쿠아리움 입장권 설명입니다.',
@@ -326,7 +326,7 @@
                     childPrice: 5000,
                 },
                 scuba: {
-                    img: 'scuba.avif',
+                    img: '/img/scuba.avif',
                     programNo: 'P2',
                     title: '아쿠아리움 입장권 + 스킨스쿠버 체험',
                     description: '스킨스쿠버 체험 프로그램 설명입니다.',
@@ -334,7 +334,7 @@
                     childPrice: 15000
                 },
                 feeding: {
-                    img: 'feed.jpg',
+                    img: '/img/feed.jpg',
                     programNo: 'P3',
                     title: '아쿠아리움 입장권 + 동물 먹이주기 체험',
                     description: '동물 먹이주기 체험 설명입니다.',

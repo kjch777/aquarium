@@ -1,5 +1,7 @@
 package com.camel.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,4 +21,14 @@ public class ReserveService {
 		log.info("reserve 값 :" + reserve);
 		reserveMapper.insertReserve(reserve);
 	}
+	
+	// 예약정보 조회
+	public List<Reserve> getAllReserve() {
+		return reserveMapper.getAllReserve();
+	}
+	/*
+	public List<Reserve> getAllReserve(String memberId) {
+	    return reserveMapper.getAllReserve(memberId);
+	}
+	 * */
 }

@@ -8,4 +8,13 @@
         INSERT INTO RESERV (reserv_no, member_id, program_no, reserv_total_count, child_count, adult_count, reserv_total_price, reserv_date, reserv_cancle, reserv_exprt) 
         VALUES (reserv_seq.nextval, #{memberId}, #{programNo}, #{adultCount} + #{childCount}, #{childCount}, #{adultCount}, #{reservTotalPrice}, #{reservDate}, #{reservCancle}, #{reservExprt})
     </insert>
+    
+    <select id="getAllReserve" resultType="com.camel.project.dto.Reserve">
+    	SELECT r.reserv_no as reservNo, p.program_name as programName, r.reserv_date as reservDate, r.adult_count as adultCount, r.child_count as childCount, r.reserv_total_price as reservTotalPrice
+		FROM RESERV r, PROGRAM p
+		WHERE r.program_no = p.program_no 
+		AND r.RESERV_DATE >= To_DATE(SYSDATE, 'RR/MM/DD') <!-- AND r.RESERV_DATE >= To_DATE(SYSDATE, 'RR/MM/DD') -->
+		AND r.MEMBER_ID = 'reserveId' <!-- reserveId' 임시 -> 로그인한 아이디값 #{member_id} -->
+		ORDER BY reservDate, reservNo
+    </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.camel.project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,16 @@ public class ReserveController {
 	@GetMapping("/program")
 	public String program() {
 		return"program";
+	}
+	
+	@GetMapping("/usageguide")
+	public String usageguide() {
+		return "usageguide";
+	}
+	
+	@GetMapping("/reserveConfirm")
+	public String reserveConfirm() {
+		return "reservConfirm";
 	}
 
 	@GetMapping("/reserve")
@@ -40,6 +52,18 @@ public class ReserveController {
 		reserveService.insertReserve(reserve);
 		
 		return "reservConfirm"; //예약 완료 페이지로 이동
+	}
+	
+	@GetMapping("/reserveConfirmCheck")
+	/*
+	public String getAllReserve(Model model, @@RequestParam String memberId) {
+		List<Reserve> reserve = reserveService.getAllReserve(memberId);
+	*/
+	public String getAllReserve(Model model) {
+		List<Reserve> reserve = reserveService.getAllReserve();
+		log.info("DB에 저장된 reserve 모두 보기 : " + reserve);
+		model.addAttribute("reservList", reserve);
+		return "reservConfirm";
 	}
 
 }

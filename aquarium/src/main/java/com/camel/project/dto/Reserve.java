@@ -22,5 +22,7 @@ public class Reserve {
 	private Date reservDate;
 	private String reservCancle;
 	private String reservExprt;
+	
+	private String programName;
 
 }
