@@ -132,10 +132,10 @@
               <div th:if="${session.loginSession == null}" class="ml-auto">
                 <a href="login.html" class="/login">로그인</a>
                 </div>
-                <div th:if="${session.loginSession != null}" class="ml-auto welcomeMsg">
+              <div th:if="${session.loginSession != null}" class="ml-auto welcomeMsg">
                     <span th:text="${session.loginSession.member_name}+'님, 환영합니다.'"></span>
                 </div>
-                </div>  
+              </div>  
           </nav>
     </header>
 

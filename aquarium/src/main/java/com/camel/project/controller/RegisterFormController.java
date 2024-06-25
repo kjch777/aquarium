@@ -15,12 +15,12 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class RegisterFormController {
-
+	
 	@GetMapping("/")
 	public String RegisterForm(Model model) {
 		model.addAttribute("register", new RegisterForm());
 		
-		return "registerForm";
+		return "Main";
 	}
 	
 	@Autowired
@@ -30,10 +30,10 @@ public class RegisterFormController {
 	public String insertMember(RegisterForm registerForm, Model model) {
 		
 		registerFormService.insertMember(registerForm);
-		return "redirect:/";
+		return "registerForm";
 	}
 
-	@PostMapping("")
+/*	@PostMapping("")
 	public String getId(
 			Model model,
 			@RequestParam("memberId") String memberId,
@@ -49,5 +49,5 @@ public class RegisterFormController {
 			model.addAttribute("message","사용 가능한 아이디입니다.");
 			return "redirect:/";
 		}
-	}
+	}*/
 }
