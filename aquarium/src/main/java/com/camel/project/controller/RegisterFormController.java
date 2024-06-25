@@ -16,11 +16,16 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class RegisterFormController {
 	
-	@GetMapping("/")
+    @GetMapping("/main")
+    public String mainPage() {
+        return "main"; // main.html 등의 뷰 이름을 반환
+    }
+	
+	@GetMapping("/registerForm")
 	public String RegisterForm(Model model) {
 		model.addAttribute("register", new RegisterForm());
 		
-		return "Main";
+		return "registerForm";
 	}
 	
 	@Autowired
@@ -30,7 +35,7 @@ public class RegisterFormController {
 	public String insertMember(RegisterForm registerForm, Model model) {
 		
 		registerFormService.insertMember(registerForm);
-		return "registerForm";
+		return "redirect:/main";
 	}
 
 /*	@PostMapping("")

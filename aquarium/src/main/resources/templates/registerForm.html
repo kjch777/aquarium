@@ -77,7 +77,7 @@
     <header>
         <nav class="navform navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="home.html">
+              <a class="navbar-brand" href="/main">
                 <img src="/image/pngegg.png" alt="logoImage" style="width: 210px;">
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,7 +130,7 @@
                 </ul>
               </div>
               <div th:if="${session.loginSession == null}" class="ml-auto">
-                <a href="login.html" class="/login">로그인</a>
+                <a href="/registerForm" class="/login">로그인</a>
                 </div>
               <div th:if="${session.loginSession != null}" class="ml-auto welcomeMsg">
                     <span th:text="${session.loginSession.member_name}+'님, 환영합니다.'"></span>
@@ -151,8 +151,6 @@
                         <label for="memberId" class="col-sm-3 col-form-label">아이디</label>
                         <div class="col-sm-9 form-group">
                             <input type="text" th:field="*{memberId}" class="form-control mb-2" id="memberId" style="width: 100%;" required>
-                        	<button type="button" class="btn btn-outline-info mb-1" onclick="idDupl()">중복 확인</button>
-                            &nbsp;<span id="idDupl"></span>
                             &nbsp;<span id="validateIdMsg"></span>
                         </div>
                     </div>

@@ -239,7 +239,7 @@
     <header>
       <nav class="navform navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="home.html">
+          <a class="navbar-brand" href="/main">
             <img src="/image/pngegg.png" alt="logoImage" style="width: 210px" />
           </a>
           <button
@@ -337,7 +337,7 @@
             </ul>
           </div>
           <div th:if="${session.loginSession == null}" class="ml-auto">
-            <a href="login.html" class="/login">로그인</a>
+            <a href="/registerForm" class="/login">로그인</a>
           </div>
           <div
             th:if="${session.loginSession != null}"
@@ -511,7 +511,7 @@
               alt="program"
             />
             <div class="overlay">
-              <h2>대형 수조 다이빙 체험</h2>
+              <h2 style="font-weight: bold; font-family:inherit;">대형 수조 다이빙 체험</h2>
               <br /><br /><br /><br /><br /><br /><br /><br />
               <span
                 >수조의 높이만 무려 11m! 제주의 바다를 담은 초대형 수조에서
@@ -532,7 +532,7 @@
           <div class="image-container">
             <img src="/image/feed.jpg" alt="program" />
             <div class="overlay">
-              <h2>먹이주기 체험</h2>
+              <h2 style="font-weight: bold; font-family:inherit;">먹이주기 체험</h2>
               <br /><br /><br /><br /><br /><br /><br /><br />
               <span
                 >아쿠아리스트가 직접 먹이를 주면서 귀여운 펭귄과 서로 교감하는
