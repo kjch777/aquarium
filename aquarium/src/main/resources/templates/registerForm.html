@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="/js/registerForm.js"></script>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
         label {
             margin: 10px;
@@ -61,8 +61,9 @@
             font-size: large;
             font-weight: bold;
         }
-        .welcomeMsg{
-            display:none;
+        .movePage{
+        	color: darkblue;
+        	font-weight: bold;
         }
         /*푸터*/
         footer {
@@ -77,7 +78,7 @@
     <header>
         <nav class="navform navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="/main">
+              <a class="navbar-brand" href="/">
                 <img src="/image/pngegg.png" alt="logoImage" style="width: 210px;">
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,10 +131,12 @@
                 </ul>
               </div>
               <div th:if="${session.loginSession == null}" class="ml-auto">
-                <a href="/registerForm" class="/login">로그인</a>
+                <a href="/login" class="movePage">로그인</a>
+                <a href="/MyInfo" class="movePage">개인정보 수정</a>
                 </div>
-              <div th:if="${session.loginSession != null}" class="ml-auto welcomeMsg">
-                    <span th:text="${session.loginSession.member_name}+'님, 환영합니다.'"></span>
+              <div th:if="${session.loginSession != null}" class="ml-auto">
+                    <span th:text="${session.loginSession.memberName}+'님, 환영합니다.'"></span>
+                    <a href="/MyInfo" class="movePage">개인정보 수정</a>
                 </div>
               </div>  
           </nav>
@@ -151,6 +154,8 @@
                         <label for="memberId" class="col-sm-3 col-form-label">아이디</label>
                         <div class="col-sm-9 form-group">
                             <input type="text" th:field="*{memberId}" class="form-control mb-2" id="memberId" style="width: 100%;" required>
+                            <button type="button" class="btn btn-outline-info" onclick="idDupl()">중복 확인</button>
+                            &nbsp;<span id="idDupl"></span>
                             &nbsp;<span id="validateIdMsg"></span>
                         </div>
                     </div>
@@ -175,8 +180,19 @@
                     <div class="row mb-2">
                         <label for="memberEmail" class="col-sm-3 col-form-label">이메일</label>
                         <div class="col-sm-9 form-group">
-                            <input type="email" th:field="*{memberEmail}" class="form-control mb-2" id="memberEmail" style="width: 100%;" required>
-                            <button type="button" class="btn btn-outline-info">인증하기</button>
+                            <input type="text" th:field="*{memberEmail}" class="form-control mb-2" id="memberEmail" style="width: 100%;" required>
+                            <button type="button" class="btn btn-outline-info" onclick="sendEmail()">인증 번호 보내기</button>
+                            &nbsp;<span id="emailMessage"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-2" style="display: none;" id="emailCheck">
+                        <label for="memberEmail" class="col-sm-3 col-form-label">인증번호 입력</label>
+                        <div class="col-sm-9 form-group">
+                            <input type="text" class="form-control mb-2" id="checkNumber" style="width: 100%;" required>
+                            <button type="button" class="btn btn-outline-info" onclick="checkEmail()">인증 확인</button>
+                            &nbsp;<span id="emailConfirmMessage"></span>
+                        	<input type="text" id="Confirm" name="Confirm" style="display: none" value="">
                         </div>
                     </div>
                     

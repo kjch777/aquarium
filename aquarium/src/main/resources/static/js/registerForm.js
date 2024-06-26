@@ -1,6 +1,6 @@
 
 //아이디 중복검사
-/*function idDupl(){
+function idDupl(){
 
     var id = $("#memberId").val();
     var idRegExp = /^[a-z0-9A-Z]{5,50}$/;
@@ -13,15 +13,24 @@
         $("#idDupl").text("잘못된 아이디 방식입니다.").css("color", "red");
         return false;
     }
-    else if(id === "username"){
-        $("#idDupl").text("중복된 아이디입니다.").css("color", "red");
-        return false;
-    }
-    else{
-        $("#idDupl").text("사용 가능한 아이디입니다.").css("color", "green");
-        return true;
-    }
-}*/
+	$.ajax({
+		url:"/checkId",
+		type:"post",
+        dataType:"json",
+		data:{"memberId" : id},
+        success: function(result){
+			if(result == true){
+				$("#idDupl").text("사용 가능한 아이디입니다.").css("color", "green");
+				return true;
+			}
+			else{
+				$("#idDupl").text("중복된 아이디입니다.").css("color", "red");
+				return false;
+			}
+		}
+	});
+	
+}
 
 //비밀번호 일치 확인
 function pwSame(){
@@ -40,6 +49,38 @@ function pwSame(){
     else{
         $("#pwSame").text("비밀번호가 일치합니다.").css("color", "green");
         return true;
+    }
+}
+
+//이메일 인증
+function sendEmail(){
+    if (!$("#memberEmail").val()) {
+    	$("#emailMessage").text("이메일을 입력해주세요.");
+    	return;
+    }
+    $("#emailCheck").css("display","block");    
+    $.ajax({
+        url:"/mail",
+        type:"post",
+        dataType:"json",
+        data:{"mail" : $("#memberEmail").val()},
+        success: function(data){
+            $("#emailMessage").text("인증번호가 발송되었습니다.");
+            $("#Confirm").attr("value",data);
+        }
+    });
+}
+
+function checkEmail(){
+    var number1 = $("#checkNumber").val();
+    var number2 = $("#Confirm").val();
+
+    if(number1 == number2){
+        $("#emailConfirmMessage").text("인증번호가 일치합니다.").css("color", "green");
+        return true;
+    }else{
+        $("#emailConfirmMessage").text("인증번호가 일치하지 않습니다.").css("color", "red");
+        return false;
     }
 }
 
@@ -113,23 +154,22 @@ $(document).ready(function(){
     //폼 제출 유효성 검사
     $("#registerForm").submit(function(event) {
 
-   //   var isIdValid = idDupl();
         var isPwValid = pwSame();
+        var isEmailValid = checkEmail();
         var isNameValid = $("#memberName").val() !== "" && /^[가-힣]{2,5}$/.test($("#memberName").val()); // 이름 검증 추가
         var isPwRegExpValid = $("#memberPw").val() !== "" && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test($("#memberPw").val());
         var isIdRegExpValid = $("#memberId").val() !== "" && /^[a-z0-9A-Z]{5,50}$/.test($("#memberId").val());
         
-        console.log(isIdValid);
         console.log(isPwValid);
         console.log(isNameValid);
         console.log(isPwRegExpValid);
         console.log(isIdRegExpValid);
 
         // 모든 조건이 충족되었는지 확인
-        if (isPwValid && isNameValid && isPwRegExpValid && isIdRegExpValid) {
+        if (isPwValid && isNameValid && isPwRegExpValid && isIdRegExpValid && isEmailValid) {
 
             // 모든 조건이 충족되었을 때 폼 제출 허용
-            window.location.replace("/login.html");
+            window.location.replace("/login");
 
         } else {
             
