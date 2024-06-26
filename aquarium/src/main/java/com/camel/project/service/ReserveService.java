@@ -30,5 +30,17 @@ public class ReserveService {
 	public List<Reserve> getAllReserve(String memberId) {
 	    return reserveMapper.getAllReserve(memberId);
 	}
-	 * */
+	*/
+	
+	// 예약삭제
+	public void deleteReservations(List<Integer> reservNo) {
+	    for (Integer no : reservNo) {
+	        reserveMapper.deleteReservation(no);
+	    }
+	}
+	
+	// 예약정보 업데이트
+	public void updateReserve() {
+		reserveMapper.updateReserve();
+	}
 }

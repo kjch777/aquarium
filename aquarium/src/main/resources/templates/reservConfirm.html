@@ -151,42 +151,66 @@
         }
     </style>
     <div class="container mt-5">
-        <table>
-            <thead>
-                <tr>
-                    <th> </th>
-                    <th>예약번호</th>
-                    <th>프로그램명</th>
-                    <th>예약일자</th>
-                    <th>인원수(성인/어린이)</th>
-                    <th>총 결제금액</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each = "r : ${reservList}">
-                    <td><input type="checkbox"></td>
-                    <td th:text="${r.reservNo}"></td>
-                    <td th:text="${r.programName}"></td>
-                    <td th:text="${r.reservDate}"></td>
-                    <td th:text="${r.adultCount + r.childCount} + ' (' + ${r.adultCount} + '/' + ${r.childCount} + ')'"></td>
-                    <td th:text="${r.reservTotalPrice}"></td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- 예약확인 버튼 클릭 시 로그인 안되어있을 시 로그인 페이지로 이동 -->
-        <!-- 로그인 되어있는 아이디 정보로 예약 내역 보여주기 -->
-        <!-- 확인하기 버튼 클릭 메인페이지로 이동??-->
-        <!-- 취소하기 버튼 클릭 -->
-        <div class="reservConfBtnSection">
-            <button onclick="location.href='/reserveConfirmCheck'">확인하기</button><button>취소하기</button>
-        </div>
+    	<!-- <form id="reservForm" method="post" action="/deleteReservation"> -->
+	    <form id="reservForm" method="post" action="/updateAndShowReservations">
+	        <table>
+	            <thead>
+	                <tr>
+	                    <th> </th>
+	                    <th>예약번호</th>
+	                    <th>프로그램명</th>
+	                    <th>예약일자</th>
+	                    <th>인원수(성인/어린이)</th>
+	                    <th>총 결제금액</th>
+	                    <th>만료여부</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr th:each = "r : ${reservList}">
+	                    <td><input type="checkbox" name="reservNo" th:value="${r.reservNo}"></td>
+	                    <td th:text="${r.reservNo}"></td>
+	                    <td th:text="${r.programName}"></td>
+	                    <td th:text="${r.reservDate}"></td>
+	                    <td th:text="${r.adultCount + r.childCount} + ' (' + ${r.adultCount} + '/' + ${r.childCount} + ')'"></td>
+	                    <!-- <td th:text="${r.reservTotalPrice}"></td> -->
+	                    <td th:text="${#numbers.formatDecimal(r.reservTotalPrice, 0, 'COMMA', 0, 'POINT')}"></td><!-- 숫자 형식 변환 -->
+	                    <!--                숫자형식변환포멧(변환할 값, 소수점이하자리수, 구분자형태, 소수점이하 라운딩모드, 정수와 소수 구분자형태) -->
+	                    <td th:text="${r.reservExprt}"></td>
+	                </tr>
+	            </tbody>
+	        </table>
+	        <div class="reservConfBtnSection">
+	        	<!-- reservForm이 확인하기버튼과 취소하기 버튼 했을 때 다르게 작동해야함. 
+	        	확인하기 클릭시 폼에 입력한 /updateAndShowReservations action을 하고,
+	        	취소하기 클릭시 js로 reservForm의 action 경로 변경
+	        	-->
+	            <button type="submit">확인하기</button>
+	            <button type="button" id="cancelButton">취소하기</button>
+	        </div>
+	    </form>
     </div>
-
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
             crossorigin="anonymous">
     </script>
+    
+    <script>
+	    $(document).ready(function() {
+	        $('#cancelButton').click(function() {
+	            var checkedBoxes = $('input[name="reservNo"]:checked'); // name이 reservNo인 체크박스의 체크가 되어있는것들을 가져오기
+	            if (checkedBoxes.length === 0) {
+	                alert("취소할 예약을 선택하세요.");
+	                return;
+	            }
+	
+	            $('#reservForm').attr('action', '/deleteReservation'); // action 값 변경
+	            $('#reservForm').submit();
+	        });
+	    });
+	</script>
+
+    
     <footer class="footer">
         <div class="container text-center">
             <div class="icon">

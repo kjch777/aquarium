@@ -10,11 +10,22 @@
     </insert>
     
     <select id="getAllReserve" resultType="com.camel.project.dto.Reserve">
-    	SELECT r.reserv_no as reservNo, p.program_name as programName, r.reserv_date as reservDate, r.adult_count as adultCount, r.child_count as childCount, r.reserv_total_price as reservTotalPrice
+    	SELECT r.reserv_no as reservNo, p.program_name as programName, r.reserv_date as reservDate, r.adult_count as adultCount, r.child_count as childCount, r.reserv_total_price as reservTotalPrice, r.reserv_exprt as reservExprt
 		FROM RESERV r, PROGRAM p
 		WHERE r.program_no = p.program_no 
-		AND r.RESERV_DATE >= To_DATE(SYSDATE, 'RR/MM/DD') <!-- AND r.RESERV_DATE >= To_DATE(SYSDATE, 'RR/MM/DD') -->
+		<!-- AND r.RESERV_DATE >= To_DATE(SYSDATE, 'RR/MM/DD') --> <!-- AND r.RESERV_DATE >= To_DATE(SYSDATE, 'RR/MM/DD') -->
 		AND r.MEMBER_ID = 'reserveId' <!-- reserveId' 임시 -> 로그인한 아이디값 #{member_id} -->
 		ORDER BY reservDate, reservNo
     </select>
+    
+    <delete id="deleteReservation" parameterType="int">
+	    DELETE FROM RESERV WHERE reserv_no = #{reservNo}
+	</delete>
+	
+	<update id="updateReserve" parameterType="com.camel.project.dto.Reserve">
+		UPDATE RESERV
+		SET RESERV_EXPRT = 'Y'
+		WHERE To_DATE(SYSDATE, 'RR/MM/DD') > RESERV_DATE
+		AND MEMBER_ID = 'reserveId' <!-- reserveId' 임시 -> 로그인한 아이디값 #{member_id} -->
+	</update>
 </mapper>

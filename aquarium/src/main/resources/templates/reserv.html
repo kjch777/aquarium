@@ -286,7 +286,8 @@
         function updateAdultPrice() {
             var adultCount = parseInt($("#adultCount").val());
             var adultPrice = adultCount * programAdultPrice;
-            $("#adultPrice").text(adultPrice + "원");
+            var formattedPrice = adultPrice.toLocaleString(); // toLocaleString() 숫자를 통화형식(천단위씩)으로 변환
+            $("#adultPrice").text(formattedPrice + "원");
             updateTotalPrice();
         }
 
@@ -294,7 +295,8 @@
         function updateChildPrice() {
             var childCount = parseInt($("#childCount").val());
             var childPrice = childCount * programChildPrice;
-            $("#childPrice").text(childPrice + "원");
+            var formattedPrice = childPrice.toLocaleString();
+            $("#childPrice").text(formattedPrice + "원");
             updateTotalPrice();
         }
 
@@ -303,7 +305,8 @@
             var adultCount = parseInt($("#adultCount").val());
             var childCount = parseInt($("#childCount").val());
             var totalPrice = (adultCount * programAdultPrice) + (childCount * programChildPrice);
-            $("#reservTotalPrice").text(totalPrice + "원");
+            var formattedPrice = totalPrice.toLocaleString();
+            $("#reservTotalPrice").text(formattedPrice + "원");
             $("#reservTotalPriceInput").val(totalPrice);
         }
 
