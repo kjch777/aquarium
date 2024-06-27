@@ -37,10 +37,6 @@ body {
 	font-weight: bold;
 }
 
-.movePage {
-	color: darkblue;
-	font-weight: bold;
-}
 /*푸터*/
 footer {
 	background-color: darkblue;
@@ -269,23 +265,17 @@ hr {
 				<div class="collapse navbar-collapse justify-content-center"
 					id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item dropdown mr-5"><a
-							class="nav-link dropdown-toggle" href="#" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">
-								방문 전 정보 </a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">이용안내</a></li>
-								<li><hr class="dropdown-divider" /></li>
-								<li><a class="dropdown-item" href="#">공지사항</a></li>
-							</ul></li>
+						<li class="nav-item mr-5">
+						    <a class="nav-link" href="/information">이용 안내</a>
+						</li>
 						<li class="nav-item dropdown mr-5"><a
 							class="nav-link dropdown-toggle" href="#" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false">
 								아쿠아리움 소개 </a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">전시생물 소개</a></li>
+								<li><a class="dropdown-item" href="/introducing_fish">전시생물 소개</a></li>
 								<li><hr class="dropdown-divider" /></li>
-								<li><a class="dropdown-item" href="#">프로그램 소개</a></li>
+								<li><a class="dropdown-item" href="/introducing_program">프로그램 소개</a></li>
 							</ul></li>
 						<li class="nav-item dropdown mr-5"><a
 							class="nav-link dropdown-toggle" href="#" role="button"
@@ -308,13 +298,13 @@ hr {
 					</ul>
 				</div>
 				<div th:if="${session.loginSession == null}" class="ml-auto">
-					<a href="/registerForm" class="movePage">로그인</a> 
-					<a href="/MyInfo" class="movePage">개인정보수정</a>
+					<a href="/login" class="login">로그인</a> 
 				</div>
 				<div th:if="${session.loginSession != null}"
 					class="ml-auto">
-					<span th:text="${session.loginSession.memberName}+'님, 환영합니다.'"></span>
-					<a href="/MyInfo" class="movePage">개인정보 수정</a>
+					<span th:text="${session.loginSession.memberName}+'님, 환영합니다.'"></span><br>
+					<a href="/MyInfo" class="login">개인정보 수정</a><br>
+					<a href="/logout" class="login">로그아웃</a>
 				</div>
 			</div>
 		</nav>
@@ -341,35 +331,32 @@ hr {
 				<div class="operation-hours">
 					<div class="row">
 						<div class="day col-6 mb-3">
-							<div class="day-item mb-3">월~토</div>
+							<div class="day-item mb-3">월 - 토</div>
 							<div class="day-item">일요일/공휴일</div>
 						</div>
 						<div class="time col-6 mb-3">
-							<div class="time-item mb-3">10:00 - 18:00</div>
+							<div class="time-item mb-3">10:00 - 20:00</div>
 							<div class="time-item">휴관</div>
 						</div>
 					</div>
 					<br />
 					<br /> <span
 						style="display: block; margin-top: 10px; font-size: large; font-weight: 500; color: white;">
-						평균 관람시간은 2시간 내외입니다. 관람시간은 개인적인 차이가 있을 수 있습니다. </span> <br /> <a href="#"
-						class="btn btn-primary btn-lg mt-3 align-self-end">자세히
-						보기</a>
+						평균 관람시간은 2시간 내외입니다. 관람시간은 개인적인 차이가 있을 수 있습니다. </span>
 				</div>
 			</div>
 			<div class="info col-md-6">
 				<h2 style="font-weight: bold; color: white; margin-bottom: 50px">
-					예매 가격</h2>
+					이용 요금</h2>
 				<div class="row">
 					<span class="col-6" style="font-size: 140%; color: white">내셔널
 						마린 아쿠아리움</span> <span class="col-6" style="font-size: 140%; color: white">33,000원</span>
 				</div>
 				<br />
-				<div class="mt-auto">
-					<a href="#" class="btn btn-primary btn-lg mt-3 align-self-end">자세히
-						보기</a>
-				</div>
 			</div>
+			<div class="col-md-12 mt-4"> <!-- col-md-12를 사용하여 버튼을 왼쪽으로 정렬하기 -->
+        		<a href="/information" class="btn btn-primary" style="padding: 10px; width: 100%;">자세히 보기</a>
+    		</div>
 		</div>
 
 		<hr />
@@ -380,46 +367,46 @@ hr {
 			<div class="gallery">
 				<div class="gallery-row">
 					<div class="gallery-item">
-						<a href="#"><img
+						<a href="/introducing_fish"><img
 							src="/image/20190110001046_0.jpg" alt="fishPhoto" /></a>
 					</div>
 					<div class="gallery-item">
-						<a href="#"><img
+						<a href="/introducing_fish"><img
 							src="/image/20221012020516907_pJc2j.jpg" alt="fishPhoto" /></a>
 					</div>
 					<div class="gallery-item">
-						<a href=""><img
+						<a href="/introducing_fish"><img
 							src="/image/20221012020518066_fgZ1S.jpg" alt="fishPhoto" /></a>
 					</div>
 					<div class="gallery-item">
-						<a href=""><img
+						<a href="/introducing_fish"><img
 							src="/image/a0005111_main.jpg" alt="fishPhoto" /></a>
 					</div>
 					<div class="gallery-item">
-						<a href=""><img
+						<a href="/introducing_fish"><img
 							src="/image/a3000050_main.jpg" alt="fishPhoto" /></a>
 					</div>
 				</div>
 				<div class="gallery-row">
 					<div class="gallery-item">
-						<a href=""><img
+						<a href="/introducing_fish"><img
 							src="/image/avbsjuoeyg63cxirxlaf.jpg" alt="fishPhoto" /></a>
 					</div>
 					<div class="gallery-item">
-						<a href=""><img src="/image/original.jpg"
+						<a href="/introducing_fish"><img src="/image/original.jpg"
 							alt="fishPhoto" /></a>
 					</div>
 					<div class="gallery-item">
-						<a href=""><img
+						<a href="/introducing_fish"><img
 							src="/image/Sunshine aquarium.jpg" alt="fishPhoto" /></a>
 					</div>
 					<div class="gallery-item">
-						<a href=""><img
+						<a href="/introducing_fish"><img
 							src="/image/ts60caZ8_MmLWpC6sqGOIR0HB0j8U4wnfDoiUlBChg-rZUWjypEHPm5jXjdxWYL78YisWtdAbvAv97VMWFM8CzZmri9txWxk9oyC3HPC1WrTgjBweL_4wHtNmCd4tKzwCE_P2dNUOuPBIyI08Y-AWQ.jpg"
 							alt="fishPhoto" /></a>
 					</div>
 					<div class="gallery-item">
-						<a href=""><img
+						<a href="/introducing_fish"><img
 							src="/image/upjnolvcjxnrm93mukpu.jpg" alt="fishPhoto" /></a>
 					</div>
 				</div>
@@ -447,7 +434,7 @@ hr {
 						<br /> 알록달록 크고 작은 다양한 생물들이 바로 눈앞에서 유영하는 잊지 못할 경험을 선사합니다.
 						</span><br />
 						<br />
-						<br /> <a href="#" class="btn btn-outline-light"
+						<br /> <a href="/introducing_program" class="btn btn-outline-light"
 							style="border-radius: 20px">자세히 보기</a>
 					</div>
 				</div>
@@ -469,7 +456,7 @@ hr {
 						<br /> 내셔널 마린 아쿠아리움에서 펭귄의 종류, 생김새, 생태를 쉽고 재미있는 설명과 함께 알아보아요!
 						</span><br />
 						<br />
-						<br /> <a href="#" class="btn btn-outline-light"
+						<br /> <a href="/introducing_program" class="btn btn-outline-light"
 							style="border-radius: 20px">자세히 보기</a>
 					</div>
 				</div>
@@ -535,7 +522,7 @@ hr {
 
 	</div>
 	<footer class="footer">
-		<div class="container text-center">
+		<div class="footer-container text-center">
 			<div class="icon">
 				<p>
 					<a href="https://www.facebook.com/?locale=ko_KR"><svg

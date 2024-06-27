@@ -20,4 +20,7 @@ public interface MemberMapper {
 	
 	//회원 정보 수정
 	void updateMember(Member member);
+	
+	//회원 탈퇴
+	void deleteMember(@Param("memberNo") int memberNo);
 }

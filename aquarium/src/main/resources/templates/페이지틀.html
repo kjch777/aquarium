@@ -1,92 +1,55 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>로그인</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="/js/registerForm.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-        .form-control {
-            border: none;
-            border-bottom: 1px solid #ced4da; 
-            border-radius: 0; 
-        }
-        body{
-            background-color: white;
-            margin: 0;
-            padding: 0;
-        }
-        .mainform{
-            margin-top: 20px;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 5px 5px 10px darkblue;
-        }
-        .backimg {
-            flex: 1;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .backimg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .form-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .form {
-            width: 500px;
-            height: 400px;
-            padding: 20px;
-            background-color: white;
+<meta charset="UTF-8" />
+<title>전시생물 소개</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+<script src="/js/registerForm.js"></script>
+<style>
+/*내비게이션*/
+.navform {
+	box-shadow: 5px 5px 10px black;
+	background-color: rgb(250, 251, 253);
+}
 
-        }
-        .form h3 {
-            font-weight: bold;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .loginButton {
-            width: 100%;
-        }
-    /*내비게이션*/
-    .navform{
-        box-shadow: 5px 5px 10px black;
-        background-color: rgb(250, 251, 253)
-    }
-    .login {
-        margin-left: auto; 
-        color: darkblue;
-        font-size: small;
-        font-weight: bold;
-    }
-    .nav-link{
-        color: darkblue;
-        font-size: large;
-        font-weight: bold;
-    }
-    /*푸터*/
-    footer {
-        background-color: darkblue;
-        color: white;
-        margin-top: 30px;
-        padding: 10px 0;
-    }
+.login {
+	margin-left: auto;
+	color: darkblue;
+	font-size: small;
+	font-weight: bold;
+}
 
-    </style>
+.nav-link {
+	color: darkblue;
+	font-size: large;
+	font-weight: bold;
+}
+
+/*푸터*/
+footer {
+	background-color: darkblue;
+	color: white;
+	margin-top: 30px;
+	padding: 10px 0;
+}
+.image-container img{
+    width: 100%;
+    height: 300px;
+    display: block;
+}
+body{
+    background-color: rgb(21, 144, 252);
+}
+
+</style>
 </head>
 <body>
 	<header>
@@ -152,33 +115,18 @@
 			</div>
 		</nav>
 	</header>
-	
-    <div class="mainform">
-        <div class="backimg">
-            <img src="/image/realistic-shark-in-ocean.jpg" alt="배경 이미지">
-        </div>
-        <div class="form-container">
-            <div class="form text-center">
-                <form action="/login" method="post">
-                    <h3 style="margin-bottom: 30px">로그인</h3>
-                    <div class="form-group">
-                        <input type="text" th:field="${member.memberId}" class="form-control" id="memberId" required placeholder="아이디">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" th:field="${member.memberPw}" class="form-control" id="memberPw" required placeholder="비밀번호">
-                    </div>
-                    <button type="submit" class="btn btn-outline-info loginButton">로그인</button>
-                    <div>
-                        <a href="#">아이디 찾기</a> |
-                        <a href="#">비밀번호 찾기</a> |
-                        <a href="/registerForm">회원가입</a>
-                    </div>
-                </form>
-            </div>
-        </div>
+
+    <div class="image-container">
+        <img src="/image/sea-fish-underwater-coral-coral-reef-biology-reef-1920x1080-px-habitat-natural-environment-invertebrate-marine-biology-coral-reef-fish-515541.jpg">
+    </div>
+
+	<div class="container-fluid" style="margin-top: 5px; width: 90%; padding: 20px; background-color: white; box-shadow: 5px 5px 10px darkblue; border-radius: 5px;">
+
     </div>
 	
-
+	
+	
+	
 	
 	<footer class="footer">
 		<div class="footer-container text-center">
@@ -223,12 +171,4 @@
 		</div>
 	</footer>
 </body>
-<script>
-$(document).ready(function() {
-    let message = "[[${msg}]]";
-    if (message != "") {
-        alert(message);
-    }
-})
-</script>
 </html>

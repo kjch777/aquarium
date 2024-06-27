@@ -75,4 +75,10 @@ public class MemberService {
 		memberMapper.updateMember(member);
 	}
 	
+	//회원 탈퇴
+	public void deleteMember(int memberNo) {
+		
+		memberMapper.deleteMember(memberNo);
+	}
+	
 }

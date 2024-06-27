@@ -153,13 +153,15 @@ $(document).ready(function(){
 
     //폼 제출 유효성 검사
     $("#registerForm").submit(function(event) {
-
+		
+	//	var isIdValid = idDupl();
         var isPwValid = pwSame();
         var isEmailValid = checkEmail();
         var isNameValid = $("#memberName").val() !== "" && /^[가-힣]{2,5}$/.test($("#memberName").val()); // 이름 검증 추가
         var isPwRegExpValid = $("#memberPw").val() !== "" && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test($("#memberPw").val());
         var isIdRegExpValid = $("#memberId").val() !== "" && /^[a-z0-9A-Z]{5,50}$/.test($("#memberId").val());
         
+   //   console.log(isIdValid);
         console.log(isPwValid);
         console.log(isNameValid);
         console.log(isPwRegExpValid);

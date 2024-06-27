@@ -20,16 +20,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberController {
 	
-	//메인 페이지 이동
-    @GetMapping("/")
-    public String mainPage() {
-        return "main"; // main.html 등의 뷰 이름을 반환
-    }
-	
     //회원가입 페이지 이동
 	@GetMapping("/registerForm")
 	public String RegisterForm(Model model) {
-		model.addAttribute("register", new Member());		
+		model.addAttribute("member", new Member());		
 		return "registerForm";
 	}
 	
@@ -102,10 +96,17 @@ public class MemberController {
 			return "redirect:/";
 			
 		} else { 
-			model.addAttribute("e", "일치하는 회원 정보가 없습니다.");
+			model.addAttribute("msg", "일치하는 회원 정보가 없습니다.");
 			model.addAttribute("member", new Member());
 			return "login";
 		}
+	}
+	
+	//로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "redirect:/";
 	}
 	
     //회원 정보 수정 이동
@@ -133,5 +134,20 @@ public class MemberController {
 		session.setAttribute("loginSession", updateMember);
 		return "redirect:/MyInfo";
     }
+    
+    //회원 탈퇴
+	@GetMapping("/deleteMember")
+	public String deleteMember(HttpSession session) {
+		Member member = (Member) session.getAttribute("loginSession");		
+		if(member == null) {
+			return "redirect:/";
+		}
+		
+		//세션에 저장된 member_id 불러오기
+		memberService.deleteMember(member.getMemberNo());
+		
+		session.invalidate(); //삭제 후 로그인 무효화
+		return "redirect:/";
+	}
 
 }

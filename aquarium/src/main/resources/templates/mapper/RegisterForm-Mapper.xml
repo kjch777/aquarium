@@ -24,4 +24,8 @@
 		memberName = #{memberName}, memberEmail = #{memberEmail}, memberPhone = #{memberPhone}
 		WHERE memberNo = #{memberNo}
 	</update>
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember" parameterType="int">
+		delete from member where memberNo = #{memberNo}
+	</delete>
 </mapper>
