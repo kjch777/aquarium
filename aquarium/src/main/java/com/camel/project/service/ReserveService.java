@@ -23,14 +23,15 @@ public class ReserveService {
 	}
 	
 	// 예약정보 조회
+	/*
 	public List<Reserve> getAllReserve() {
 		return reserveMapper.getAllReserve();
-	}
-	/*
+	} 
+	 * */
 	public List<Reserve> getAllReserve(String memberId) {
-	    return reserveMapper.getAllReserve(memberId);
+		return reserveMapper.getAllReserve(memberId);
 	}
-	*/
+	
 	
 	// 예약삭제
 	public void deleteReservations(List<Integer> reservNo) {
@@ -40,7 +41,12 @@ public class ReserveService {
 	}
 	
 	// 예약정보 업데이트
+	/*
 	public void updateReserve() {
 		reserveMapper.updateReserve();
+	}
+	*/
+	public void updateReserve(String memberId) {
+		reserveMapper.updateReserve(memberId);
 	}
 }

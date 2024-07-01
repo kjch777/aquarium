@@ -17,7 +17,8 @@
         .reserveContainer {
             display: flex;
             justify-content: center;
-            align-items: center;
+            /*align-items: center;*/
+            align-items: flex-start;
             margin: 20px auto;
             max-width: 1400px;
         }
@@ -26,9 +27,18 @@
             flex: 2;
             margin-right: 20px;
             justify-content: center; 
-            
+            padding: 20px;
             
         }
+        
+        .imgSection {
+        margin-right: 20px;
+        }
+        
+	    .description {
+	        margin-left: 20px; 
+	    }
+	    
         .reserveSection {
             flex: 1;
             background-color: white;
@@ -85,6 +95,10 @@
             padding: 10px 0px 10px 10px;
             
         }
+        
+        .hidden{
+        	display: none;
+        }
 
         footer {
             background-color: darkblue;
@@ -96,92 +110,94 @@
 </head>
 <body>
     <style>
-        .navform{
-            box-shadow: 5px 5px 10px black;
-            background-color: rgb(250, 251, 253)
-        }
-        .login {
-            margin-left: auto; 
-            color: darkblue;
-            font-size: small;
-            font-weight: bold;
-        }
-        .nav-link{
-            color: darkblue;
-            font-size: large;
-            font-weight: bold;
-        }
-        .welcomeMsg{
-            display:none;
-        }
-        .hidden{
-        	display:none;
-        }
+        /*내비게이션*/
+		.navform {
+			box-shadow: 5px 5px 10px black;
+			background-color: rgb(250, 251, 253);
+		}
+		
+		.login {
+			margin-left: auto;
+			color: darkblue;
+			font-size: small;
+			font-weight: bold;
+		}
+		
+		.nav-link {
+			color: darkblue;
+			font-size: large;
+			font-weight: bold;
+		}
     </style>
     <header>
-        <nav class="navform navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="/main">
-                <img src="/image/pngegg.png" alt="logoImage" style="width: 210px;">
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                  </svg>
-              </button>
-              <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item dropdown mr-5">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      방문 전 정보
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="/usageguide">이용안내</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">공지사항</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown mr-5">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      아쿠아리움 소개
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">전시생물 소개</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">프로그램 소개</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown mr-5">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      온라인 예매
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="/program">예약하기</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="/reserveConfirm">예약확인</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown mr-5">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      굿즈샵
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">구매하기</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">구매정보</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div th:if="${session.loginSession == null}" class="ml-auto">
-                <a href="login.html" class="/login">로그인</a>
-                </div>
-              <div th:if="${session.loginSession != null}" class="ml-auto welcomeMsg">
-                    <span th:text="${session.loginSession.member_name}+'님, 환영합니다.'"></span>
-                </div>
-              </div>  
-          </nav>
-    </header>
+		<nav class="navform navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/"> <img src="/image/pngegg.png"
+					alt="logoImage" style="width: 210px" />
+				</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+						fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+							d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+            </svg>
+				</button>
+				<div class="collapse navbar-collapse justify-content-center"
+					id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item dropdown mr-5"><a
+							class="nav-link dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+								방문 전 정보 </a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/information">이용 안내</a></li>
+								<li><hr class="dropdown-divider" /></li>
+								<li><a class="dropdown-item" href="/noticeBoard">공지사항</a></li>
+							</ul></li>
+						<li class="nav-item dropdown mr-5"><a
+							class="nav-link dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+								아쿠아리움 소개 </a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/introducing_fish">전시생물 소개</a></li>
+								<li><hr class="dropdown-divider" /></li>
+								<li><a class="dropdown-item" href="/introducing_program">프로그램 소개</a></li>
+							</ul></li>
+						<li class="nav-item dropdown mr-5"><a
+							class="nav-link dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+								온라인 예매 </a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/program">예약하기</a></li>
+								<li><hr class="dropdown-divider" /></li>
+								<li><a class="dropdown-item" href="/reserveConfirm">예약확인</a></li>
+							</ul></li>
+						<li class="nav-item dropdown mr-5"><a
+							class="nav-link dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+								굿즈샵 </a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#">구매하기</a></li>
+								<li><hr class="dropdown-divider" /></li>
+								<li><a class="dropdown-item" href="#">구매정보</a></li>
+							</ul></li>
+					</ul>
+				</div>
+				<div th:if="${session.loginSession == null}" class="ml-auto" id="loginStatus" data-logged-in="false"> <!-- loginStatus이 로그인되지 않으면 값을 false, 로그인시 값이 true js에서 활용 -->
+					<a href="/login" class="login">로그인</a> 
+				</div>
+				<div th:if="${session.loginSession != null}"
+					class="ml-auto" id="loginStatus" data-logged-in="true">
+					<span th:text="${session.loginSession.memberName}+'님, 환영합니다.'"></span><br>
+					<a href="/MyInfo" class="login">개인정보 수정</a><br>
+					<a href="/logout" class="login">로그아웃</a>
+				</div>
+			</div>
+		</nav>
+	</header>
 
     <div class="reserveContainer mt-5">
         <div class="contents">
@@ -340,7 +356,11 @@
                     img: '/img/feed.jpg',
                     programNo: 'P3',
                     title: '아쿠아리움 입장권 + 동물 먹이주기 체험',
-                    description: '동물 먹이주기 체험 설명입니다.',
+                    description: '다양한 동물에게 직접 먹이를 줄 수 있는 프로그램이 포함\n\n' + 
+                    			'펭귄 : 10:00\n' +
+                    			'수달 : 12:00\n' +
+                    			'돌고래 : 14:00\n' +
+                    			'바다표범 : 17:00\n',
                     adultPrice: 20000,
                     childPrice: 10000
                 }
@@ -351,7 +371,8 @@
                 //$("#programNo").text(programs[program].programNo); <!-- programNo의 input태그에 값을 넣어줘야함. input태그라 text로 넣어주는것이 아니라 val로 넣어줘야함  -->
                 $("#programNo").val(programs[program].programNo);
                 $("#programTitle").text(programs[program].title);
-                $("#programDescription").text(programs[program].description);
+                //$("#programDescription").text(programs[program].description);
+                $("#programDescription").html(nl2br(programs[program].description)); // .html()을 사용하여 <br> 태그가 적용되도록 설정
                 programAdultPrice = programs[program].adultPrice;
                 programChildPrice = programs[program].childPrice;
                 updateAdultPrice();
@@ -359,19 +380,39 @@
                 
             }
         }
+        
+     	// 줄바꿈 문자를 <br> 태그로 변환하는 함수
+        function nl2br(str) {
+            return str.replace(/\n/g, '<br>');
+        }
 
         // 결제 함수
         function payment() {
-            const reservDate = $('#reservDate').val();
-            if(reservDate == "") {
-                alert("예약날짜를 선택해주세요");
-                return false;
-            }
-            var adultCount = parseInt($("#adultCount").val());
-            var childCount = parseInt($("#childCount").val());
-            var reservTotalPrice = ($("#reservTotalPrice").text());
-            alert("예약날짜 " + reservDate + " 성인 " + adultCount + "명, 어린이 " + childCount + "명 총 금액 " + reservTotalPrice + " 결제되었습니다.");
-            return true;
+        	// 
+        	var loginStatusDiv = document.getElementById("loginStatus");
+    		var isLoggedIn = loginStatusDiv.getAttribute("data-logged-in") === "true";
+    		
+    		if (isLoggedIn) {
+	            const reservDate = $('#reservDate').val();
+	            if(reservDate == "") {
+	                alert("예약날짜를 선택해주세요");
+	                return false;
+	            }
+	            var adultCount = parseInt($("#adultCount").val());
+	            var childCount = parseInt($("#childCount").val());
+	            
+	            if (adultCount + childCount == 0) {
+	            	alert("인원수를 확인해 주세요");
+	            	return false;
+	            }
+	            var reservTotalPrice = ($("#reservTotalPrice").text());
+	            alert("예약날짜 " + reservDate + " 성인 " + adultCount + "명, 어린이 " + childCount + "명 총 금액 " + reservTotalPrice + " 결제되었습니다.");
+	            return true;
+    		} else {
+    			alert("로그인을 먼저 해주세요");
+    			window.location.href = "/login"; // 로그인 페이지로 리다이렉트
+    			return false;
+    		}
         }
     </script>
 
