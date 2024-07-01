@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="http://code.jquery.com/jquery-3.7.1.js"></script>
+	<link
+		  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous"
+    />
+</head>
+<body>
+	<header></header>
+	<div class="container mt-5">
+	    <form id="reservForm" method="post" action="/updateAndShowReservations">
+	        <table>
+	            <thead>
+	                <tr>
+	                    <th> </th>
+	                    <th>예약번호</th>
+	                    <th>프로그램명</th>
+	                    <th>예약일자</th>
+	                    <th>인원수(성인/어린이)</th>
+	                    <th>총 결제금액</th>
+	                    <th>만료여부</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr th:each = "r : ${reservList}">
+	                    <td><input type="checkbox" name="reservNo" th:value="${r.reservNo}"></td>
+	                    <td th:text="${r.reservNo}"></td>
+	                    <td th:text="${r.programName}"></td>
+	                    <td th:text="${r.reservDate}"></td>
+	                    <td th:text="${r.adultCount + r.childCount} + ' (' + ${r.adultCount} + '/' + ${r.childCount} + ')'"></td>
+	                    <!-- <td th:text="${r.reservTotalPrice}"></td> -->
+	                    <td th:text="${#numbers.formatDecimal(r.reservTotalPrice, 0, 'COMMA', 0, 'POINT')}"></td><!-- 숫자 형식 변환 -->
+	                    <!--                숫자형식변환포멧(변환할 값, 소수점이하자리수, 구분자형태, 소수점이하 라운딩모드, 정수와 소수 구분자형태) -->
+	                    <td th:text="${r.reservExprt}"></td>
+	                </tr>
+	            </tbody>
+	        </table>
+	        <div class="reservConfBtnSection">
+	            <button type="button" id="cancelButton">구매 취소하기</button>
+	        </div>
+	    </form>
+    </div>
+	<footer></footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+package com.camel.project.service;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.camel.project.dto.ItemOrder;
+import com.camel.project.mapper.ItemOrderMapper;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+public class ItemOrderService {
+	
+	public static final String FIXEDPATH = "../img/";
+	
+	@Autowired
+	private ItemOrderMapper itemOrderMapper;
+	
+	public List<ItemOrder> getAllItem(){
+		List<ItemOrder> itemList = null;
+		itemList = itemOrderMapper.getAllItem();
+		for(ItemOrder i : itemList) {
+			i.setFinalPath(FIXEDPATH + i.getImgFile());
+			log.info("check: " + i.getFinalPath());
+		}
+		return itemList;
+	}
+	
+	public ItemOrder getItemByNo(int itemNo) {
+		ItemOrder itemOrder = new ItemOrder();
+
+		itemOrder = itemOrderMapper.getItemByNo(itemNo);
+
+		itemOrder.setFinalPath(FIXEDPATH + itemOrder.getImgFile());
+		log.info("check: " + itemOrder.getFinalPath());
+
+		List<ItemOrder> itemList = itemOrderMapper.getAllItem();
+
+		itemList.remove(itemNo-1);
+
+		Collections.shuffle(itemList);
+
+		List<ItemOrder> randomItemList = itemList.subList(0, Math.min(3, itemList.size()));
+
+		for(ItemOrder i : randomItemList) {
+			i.setFinalPath(FIXEDPATH + i.getImgFile());
+			log.info("check: " + i.getFinalPath());
+		}
+
+		itemOrder.setItemMainList(itemList);
+
+		return itemOrder;
+	}
+
+	public ItemOrder getOrderByNo(ItemOrder param) {
+		ItemOrder itemOrder = new ItemOrder();
+		log.info("check 1: " + itemOrder);
+		// itemNo, orderQuantity, memberId
+		itemOrder = itemOrderMapper.getOrderByNo(param);
+		log.info("check 2: " + itemOrder);
+		log.info("check 2-2: " + param);
+		return itemOrder;
+	}
+	
+	public void insertOrder(ItemOrder itemOrder) {
+		itemOrderMapper.insertOrder(itemOrder);
+	}
+}

@@ -1,0 +1,23 @@
+package com.camel.project.dto;
+
+import java.util.List;
+
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class ItemOrder {
+
+	private int itemNo;
+	private String itemName;
+	private String itemDesc;
+	private int itemPrice; 
+	private String imgFile;
+	private String finalPath;
+	private List<ItemOrder> itemMainList;
+	private int orderQuantity;
+	private String memberId;
+}
