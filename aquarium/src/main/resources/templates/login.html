@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -160,13 +159,13 @@
         </div>
         <div class="form-container">
             <div class="form text-center">
-                <form action="/login" method="post">
+                <form action="/login-form" method="post">
                     <h3 style="margin-bottom: 30px">로그인</h3>
                     <div class="form-group">
-                        <input type="text" th:field="${member.memberId}" class="form-control" id="memberId" required placeholder="아이디">
+                        <input type="text" th:field="${l.memberId}" class="form-control" id="memberId" required placeholder="아이디">
                     </div>
                     <div class="form-group">
-                        <input type="password" th:field="${member.memberPw}" class="form-control" id="memberPw" required placeholder="비밀번호">
+                        <input type="password" th:field="${l.memberPw}" class="form-control" id="memberPw" required placeholder="비밀번호">
                     </div>
                     <button type="submit" class="btn btn-outline-info loginButton">로그인</button>
                     <div>
@@ -232,25 +231,4 @@ $(document).ready(function() {
     }
 })
 </script>
-=======
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8">
-<title>로그인</title>
-</head>
-<body>
-	<h1>로그인</h1>
-	<form action="/login" method="post">
-		아이디 : 
-		<input type="text" th:field="${m.memberId}"><br>
-		비밀번호 : 
-		<input type="text" th:field="${m.memberPw}"><br>
-		<button>로그인</button>
-	</form>
-	
-	<div th:if="${e}">
-		<p th:text="${e}" style="color :red;">
-	</div>
-</body>
->>>>>>> jaejinoh-reserve
 </html>
