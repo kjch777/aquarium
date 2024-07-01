@@ -16,7 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class LoginController {
-
+	
+	@GetMapping("/")
+	public String index() {
+		return "index";
+	}
+	
     @Autowired
     private LoginService loginService;
     
@@ -36,7 +41,7 @@ public class LoginController {
             session.setAttribute("loginSession", login);
             return "redirect:/"; 
         } else {
-            model.addAttribute("error", "일치하는 아이디 비밀번호가 없습니다.");
+            model.addAttribute("msg", "일치하는 아이디 비밀번호가 없습니다.");
             model.addAttribute("l", new Login());
             return "login"; 
         }
