@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.camel.project.dto.Login;
 import com.camel.project.dto.Member;
 import com.camel.project.service.MemberService;
 
@@ -35,7 +36,7 @@ public class MemberController {
 	public String insertMember(Member member, Model model) {
 		
 		memberService.insertMember(member);
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	//이메일인증
@@ -112,7 +113,7 @@ public class MemberController {
     //회원 정보 수정 이동
     @GetMapping("/MyInfo")
     public String myInfoPage(HttpSession session, Model model) {
-    	Member member = (Member) session.getAttribute("loginSession");
+    	Login member = (Login) session.getAttribute("loginSession");
 		if(member == null) {
 			return "redirect:/";
 		}
@@ -122,8 +123,8 @@ public class MemberController {
     
     //회원 정보 수정
     @PostMapping("/updateProfile")
-    public String updateMember(HttpSession session, Member updateMember) {
-    	Member member = (Member) session.getAttribute("loginSession");
+    public String updateMember(HttpSession session, Login updateMember) {
+    	Login member = (Login) session.getAttribute("loginSession");
     	
 		if(member == null) {
 			return "redirect:/";
@@ -138,7 +139,7 @@ public class MemberController {
     //회원 탈퇴
 	@GetMapping("/deleteMember")
 	public String deleteMember(HttpSession session) {
-		Member member = (Member) session.getAttribute("loginSession");		
+		Login member = (Login) session.getAttribute("loginSession");		
 		if(member == null) {
 			return "redirect:/";
 		}
