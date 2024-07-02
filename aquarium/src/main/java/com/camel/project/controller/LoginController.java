@@ -35,7 +35,7 @@ public class LoginController {
         Login login = loginService.getLogin(memberId, memberPw);
         if (login != null) {
             session.setAttribute("loginSession", login);
-            return "redirect:/"; 
+            return "main"; 
         } else {
             model.addAttribute("msg", "일치하는 아이디 비밀번호가 없습니다.");
             model.addAttribute("l", new Login());
