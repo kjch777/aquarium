@@ -23,4 +23,11 @@ public interface MemberMapper {
 	
 	//회원 탈퇴
 	void deleteMember(@Param("memberNo") int memberNo);
+	
+	//아이디 찾기
+	Member findByBirthAndName(@Param("memberBirth") String memberBirth, @Param("memberName") String memberName);
+		
+	//비밀번호 찾기
+	Member findByEmailAndId(@Param("memberId") String memberId, @Param("memberEmail") String memberEmail);
+	
 }

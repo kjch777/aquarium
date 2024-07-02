@@ -28,4 +28,14 @@
 	<delete id="deleteMember" parameterType="int">
 		delete from member where memberNo = #{memberNo}
 	</delete>
+		<!-- 생년월일과 이름으로 회원 조회 -->
+	<select id="findByBirthAndName" resultType="com.camel.project.dto.Member">
+		SELECT * FROM member
+		WHERE memberBirth = #{memberBirth} AND memberName = #{memberName}
+	</select>
+	<!-- 아이디랑 이메일로 회원 조회-->
+	<select id="findByEmailAndId" resultType="com.camel.project.dto.Member">
+		SELECT * FROM member
+		WHERE memberId = #{memberId} AND memberEmail = #{memberEmail}
+	</select>
 </mapper>

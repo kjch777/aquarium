@@ -149,5 +149,82 @@ public class MemberController {
 		session.invalidate(); //삭제 후 로그인 무효화
 		return "redirect:/";
 	}
+	//아이디 찾기 페이지 이동
+	@GetMapping("/findId")
+	public String findIdPage() {
+		return "findId";
+	}
+	
+	//아이디 찾기
+    @PostMapping("/findId")
+    public String findMemberId(@RequestParam("memberName") String memberName,
+                               @RequestParam("memberBirth") String memberBirth,
+                               Model model) {
+        String memberId = memberService.findMemberId(memberBirth, memberName);
+        
+        if (memberId != null) {
+        	model.addAttribute("memberId", memberId);
+        	System.out.println(memberId);
+            return "findIdResult"; // 결과를 보여줄 HTML 페이지 이름 (예: resultPage.html)
+        } else {
+        	model.addAttribute("msg", "일치하는 회원 정보가 없습니다.");
+            return "findId"; // 회원을 찾지 못했을 경우의 페이지 (예: notFoundPage.html)
+        }
+    }
+    
+    //아이디 찾기 결과 페이지 이동
+    @GetMapping("/findIdResult")
+    public String findIdResultPage() {
+    	return "findIdResult";
+    }
+    
+    //비밀번호 찾기 페이지 이동
+    @GetMapping("/findPw")
+    public String findPwPage() {
+    	return "findPw";
+    }
+    
+    //비밀번호 찾기
+    @PostMapping("/findPw")
+    public String findMemberPw(@RequestParam("memberId") String memberId,
+                               @RequestParam("memberEmail") String memberEmail,
+                               Model model) {
+        String memberPw = memberService.findMemberPw(memberId, memberEmail);
+        
+        if (memberPw != null) {
+            // 비밀번호 마스킹 처리
+            String maskedPassword = maskPassword(memberPw);
+            
+            model.addAttribute("memberPw", maskedPassword);
+            System.out.println(maskedPassword); // 마스킹된 비밀번호 출력
+            return "findPwResult"; // 비밀번호 찾기 결과 페이지로 이동
+        } else {
+            model.addAttribute("msg", "일치하는 회원 정보가 없습니다.");
+            return "findPw"; // 회원을 찾지 못했을 경우의 페이지로 이동
+        }
+    }
+
+    // 비밀번호 마스킹 처리 메서드
+    private String maskPassword(String password) {
+        int length = password.length();
+        StringBuilder masked = new StringBuilder();
+        
+        // 처음 세 자리를 제외하고 나머지는 마스킹 처리
+        for (int i = 0; i < length; i++) {
+            if (i < 3) {
+                masked.append(password.charAt(i));
+            } else {
+                masked.append('*');
+            }
+        }
+        
+        return masked.toString();
+    }
+    
+    //비밀번호 찾기 결과 페이지 이동
+    @GetMapping("/findPwResult")
+    public String findPwResultPage() {
+    	return "findPwResult";
+    }
 
 }

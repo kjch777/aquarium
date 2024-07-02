@@ -81,4 +81,25 @@ public class MemberService {
 		memberMapper.deleteMember(memberNo);
 	}
 	
+	//아이디 찾기
+    public String findMemberId(String memberBirth, String memberName) {
+        Member member = memberMapper.findByBirthAndName(memberBirth, memberName);
+        
+        if (member != null) {
+            return member.getMemberId();
+        } else {
+            return null; // 회원을 찾지 못했을 경우
+        }
+    }
+    
+	//비밀번호 찾기
+    public String findMemberPw(String memberId, String memberEmail) {
+        Member member = memberMapper.findByEmailAndId(memberId, memberEmail);
+        
+        if (member != null) {
+            return member.getMemberPw();
+        } else {
+            return null; // 회원을 찾지 못했을 경우
+        }
+    }
 }
