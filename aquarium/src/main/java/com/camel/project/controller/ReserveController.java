@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.camel.project.dto.Login;
 import com.camel.project.dto.Member;
 import com.camel.project.dto.Reserve;
 import com.camel.project.service.ReserveService;
@@ -54,16 +55,17 @@ public class ReserveController {
 	public String insertReserve(Reserve reserve, Model model, HttpSession session) {
 		
 		//로그인 안되어있을 시 로그인 화면으로 리틴 시키는 코드 추가
-		Member member = (Member) session.getAttribute("loginSession"); 
+		// Member member = (Member) session.getAttribute("loginSession"); 
+		Login login = (Login) session.getAttribute("loginSession");
 		// Member -> member DB테이블과 연결된 DTO자바파일명
 		// loginSession -> 로그인 했을 때 session 명(?) -> session.세션명
 		
-		if (member == null) {
+		if (login == null) {
 			return "redirect:/login";
 		}
 		
 		//reserve.setMemberId(member.getMember_id()); // 로그인한 아이디값을 Member DTO에서 가져와서 넣어주기
-		reserve.setMemberId(member.getMemberId());
+		reserve.setMemberId(login.getMemberId());
 		//reserve.setMemberId("reserveId"); // 임시
 		reserve.setReservCancle("N");
         reserve.setReservExprt("N");
@@ -82,14 +84,15 @@ public class ReserveController {
 		*/
         // 예약 정보를 업데이트
 		
-		Member member = (Member) session.getAttribute("loginSession"); 
+		// Member member = (Member) session.getAttribute("loginSession"); 
+		Login login = (Login) session.getAttribute("loginSession");
 		
-		if (member == null) {
+		if (login == null) {
 			return "redirect:/login";
 		}
 		
 		// 예약 정보를 업데이트
-		String memberId = member.getMemberId();
+		String memberId = login.getMemberId();
         reserveService.updateReserve(memberId);
 
         // 업데이트 후 예약 정보를 조회하여 모델에 추가
@@ -101,13 +104,14 @@ public class ReserveController {
 	
 	@GetMapping("/reserveConfirmCheck")
 	public String getAllReserve(Model model, HttpSession session) {
-		Member member = (Member) session.getAttribute("loginSession"); 
+		// Member member = (Member) session.getAttribute("loginSession"); 
+		Login login = (Login) session.getAttribute("loginSession");
 		
-		if (member == null) {
+		if (login == null) {
 			return "redirect:/login";
 		}
 		
-		String memberId = member.getMemberId();
+		String memberId = login.getMemberId();
         reserveService.updateReserve(memberId);
 		
 		List<Reserve> reserve = reserveService.getAllReserve(memberId);
@@ -123,9 +127,10 @@ public class ReserveController {
 		/*
 		로그인 안되어있을 시 로그인 화면으로 리틴 시키는 코드 추가 
 		*/
-		Member member = (Member) session.getAttribute("loginSession"); 
+		// Member member = (Member) session.getAttribute("loginSession"); 
+		Login login = (Login) session.getAttribute("loginSession");
 		
-		if (member == null) {
+		if (login == null) {
 			return "redirect:/login";
 		}
 		

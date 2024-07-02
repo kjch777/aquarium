@@ -5,7 +5,7 @@
 <mapper namespace="com.camel.project.mapper.LoginMapper">
     
     <select id="getLogin" resultType="com.camel.project.dto.Login" parameterType="java.util.Map">
-        SELECT * FROM MEMBERS
+        SELECT * FROM MEMBER
         WHERE MEMBERID = #{memberId}
         AND MEMBERPW = #{memberPw}
     </select>
