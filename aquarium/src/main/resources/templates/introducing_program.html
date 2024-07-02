@@ -1,113 +1,74 @@
 <!DOCTYPE html>
-<<<<<<< Updated upstream
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8">
-<title>로그인</title>
-</head>
-<body>
-	<h1>로그인</h1>
-	<form action="/login" method="post">
-		아이디 : 
-		<input type="text" th:field="${m.memberId}"><br>
-		비밀번호 : 
-		<input type="text" th:field="${m.memberPw}"><br>
-		<button>로그인</button>
-	</form>
-	
-	<div th:if="${e}">
-		<p th:text="${e}" style="color :red;">
-	</div>
-</body>
-=======
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>로그인</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="/js/registerForm.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-        .form-control {
-            border: none;
-            border-bottom: 1px solid #ced4da; 
-            border-radius: 0; 
-        }
-        body{
-            background-color: white;
-            margin: 0;
-            padding: 0;
-        }
-        .mainform{
-            margin-top: 20px;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 5px 5px 10px darkblue;
-        }
-        .backimg {
-            flex: 1;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .backimg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .form-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .form {
-            width: 500px;
-            height: 400px;
-            padding: 20px;
-            background-color: white;
+<meta charset="UTF-8" />
+<title>프로그램 소개</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+<script src="/js/registerForm.js"></script>
+<style>
+/*내비게이션*/
+.navform {
+	box-shadow: 5px 5px 10px black;
+	background-color: rgb(250, 251, 253);
+}
 
-        }
-        .form h3 {
-            font-weight: bold;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .loginButton {
-            width: 100%;
-        }
-    /*내비게이션*/
-    .navform{
-        box-shadow: 5px 5px 10px black;
-        background-color: rgb(250, 251, 253)
-    }
-    .login {
-        margin-left: auto; 
-        color: darkblue;
-        font-size: small;
-        font-weight: bold;
-    }
-    .nav-link{
-        color: darkblue;
-        font-size: large;
-        font-weight: bold;
-    }
-    /*푸터*/
-    footer {
-        background-color: darkblue;
-        color: white;
-        margin-top: 30px;
-        padding: 10px 0;
-    }
+.login {
+	margin-left: auto;
+	color: darkblue;
+	font-size: small;
+	font-weight: bold;
+}
 
-    </style>
+.nav-link {
+	color: darkblue;
+	font-size: large;
+	font-weight: bold;
+}
+
+/*푸터*/
+footer {
+	background-color: darkblue;
+	color: white;
+	margin-top: 30px;
+	padding: 10px 0;
+}
+.image-container {
+    position: relative; /* 상대 위치 설정 */
+}
+        
+.image-container img {
+	width: 100%; /* 이미지 너비 100% */
+	height: 300px; /* 이미지 높이 설정 (예시) */
+	display: block; /* 블록 요소로 설정하여 가로 너비에 맞춤 */
+}
+
+.image-container p {
+	position: absolute; /* 절대 위치 설정 */
+	bottom: 1px; /* 아래 여백 설정 */
+	margin-left: 110px; /* 기본 마진 제거 */
+	padding: 5px; /* 내부 여백 설정 */
+	color: #fff; /* 글자 색상 설정 */
+	font-size: 40px; /* 글자 크기 설정 */
+	font-weight: bold;
+}
+body{
+    background-color: rgb(21, 144, 252);
+}
+.program img{
+    width: 100%;
+    border: 5px solid #ddd; /* 액자의 테두리 스타일과 색상 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    padding: 10px; /* 이미지와 테두리 사이의 간격 */
+}
+</style>
 </head>
 <body>
 	<header>
@@ -174,33 +135,67 @@
 		</nav>
 	</header>
 
-	
-    <div class="mainform">
-        <div class="backimg">
-            <img src="/image/realistic-shark-in-ocean.jpg" alt="배경 이미지">
-        </div>
-        <div class="form-container">
-            <div class="form text-center">
-                <form action="/login-form" method="post">
-                    <h3 style="margin-bottom: 30px">로그인</h3>
-                    <div class="form-group">
-                        <input type="text" th:field="${l.memberId}" class="form-control" id="memberId" required placeholder="아이디">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" th:field="${l.memberPw}" class="form-control" id="memberPw" required placeholder="비밀번호">
-                    </div>
-                    <button type="submit" class="btn btn-outline-info loginButton">로그인</button>
-                    <div>
-                        <a href="/findId">아이디 찾기</a> |
-                        <a href="/findPw">비밀번호 찾기</a> |
-                        <a href="/registerForm">회원가입</a>
-                    </div>
-                </form>
+    <div class="image-container">
+        <img src="/image/sea-fish-underwater-coral-coral-reef-biology-reef-1920x1080-px-habitat-natural-environment-invertebrate-marine-biology-coral-reef-fish-515541.jpg">
+    	<p>프로그램 소개</p>
+    </div>
+
+	<div class="container-fluid" style="margin-top: 5px; width: 90%; padding: 20px; background-color: white; box-shadow: 5px 5px 10px darkblue; border-radius: 5px;">
+        <div class="row program">
+            <div class="col-6">
+                <img src="/image/image_name_20210111171933647.png" class="img-fluid">
+            </div>
+            <div class="col-6">
+                <h2>대형 수조 다이빙 체험</h2>
+                <br>
+                <p>수조의 높이만 무려 11m! 제주의 바다를 담은 초대형 수조에서 환상적인 다이빙에 도전해 보세요. 알록달록 크고 작은 다양한 생물들이 바로 눈앞에서 유영하는 잊지 못할 경험을 선사합니다.</p>
+                <pre>
+<b>소요시간</b>   약 1 시간
+<b>장소</b>       B1F > 아쿠아리움 > 메인수조(제주의 바다)
+<b>요금</b>       30,000원
+<b>소요시간</b>   약 60분 – 90분(교육시간 포함)
+<b>체험장소</b>   제주의 바다(메인 수조)
+<b>주의사항</b>   12세 이상 55세 미만 연령만 체험 가능합니다.
+
+전문 강사와 체험자가 1:1로 매칭되어 진행됩니다.
+
+수영을 못해도, 스쿠버가 처음인 분도 체험 가능합니다.
+
+공연 시간과 생물의 상태에 따라 진행시간이 변동될 수 있습니다.
+                </pre>
+                <a class="btn btn-outline-primary" href="/reserve?program=scuba">예매하러가기</a>
             </div>
         </div>
-    </div>
-	
+        <br>
+        <hr style="border: 3px solid #AED6F1; width:100%;" >
+        <br>
+        <div class="row program">
+            <div class="col-6">
+                <img src="/image/feed.jpg" class="img-fluid">
+            </div>
+            <div class="col-6">
+                <h2>펭귄 먹이주기 체험</h2>
+                <br>
+                <p>아쿠아리스트가 직접 먹이를 주면서 귀여운 펭귄과 서로 교감하는 모습을 감상할 수 있어요.
 
+                    내셔널 마린 아쿠아리움에서 펭귄의 종류, 생김새, 생태를 쉽고 재미있는 설명과 함께 알아보아요!</p>
+                <pre>
+<b>소요시간</b>   약 10분
+<b>장소</b>       B1F > 아쿠아리움 > 펭귄 수조
+<b>요금</b>       20,000원
+<b>소요시간</b>   약 20분(교육시간 포함)
+<b>체험장소</b>   펭귄 수조
+<b>주의사항</b>   만 10세 미만의 어린이는 체험할 수 없습니다. 만 10-12세 아동은 티켓을 구매한 
+           성인과 동반해야 합니다.
+
+전문 강사와 체험자가 1:1로 매칭되어 진행됩니다.
+
+공연 시간과 생물의 상태에 따라 진행시간이 변동될 수 있습니다.
+                </pre>
+                <a class="btn btn-outline-primary" href="/reserve?program=feeding">예매하러가기</a>
+            </div>
+        </div>    
+    </div>
 	
 	<footer class="footer">
 		<div class="footer-container text-center">
@@ -245,14 +240,4 @@
 		</div>
 	</footer>
 </body>
-<script>
-$(document).ready(function() {
-    let message = "[[${msg}]]";
-    if (message != "") {
-        alert(message);
-    }
-})
-</script>
-
->>>>>>> Stashed changes
 </html>

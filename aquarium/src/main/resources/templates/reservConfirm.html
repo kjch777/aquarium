@@ -20,23 +20,26 @@
 <body>
     <style>
         /*내비게이션*/
-		.navform {
-			box-shadow: 5px 5px 10px black;
-			background-color: rgb(250, 251, 253);
-		}
-		
-		.login {
-			margin-left: auto;
-			color: darkblue;
-			font-size: small;
-			font-weight: bold;
-		}
-		
-		.nav-link {
-			color: darkblue;
-			font-size: large;
-			font-weight: bold;
-		}
+.navform {
+	box-shadow: 5px 5px 10px black;
+	background-color: rgb(250, 251, 253);
+}
+
+.login {
+	margin-left: auto;
+	color: darkblue;
+	font-size: small;
+	font-weight: bold;
+}
+
+.nav-link {
+	color: darkblue;
+	font-size: large;
+	font-weight: bold;
+}
+.mainlink{
+	margin-right: 45px;
+}
     </style>
     <header>
 		<nav class="navform navbar navbar-expand-lg bg-body-tertiary">
@@ -56,18 +59,12 @@
 				</button>
 				<div class="collapse navbar-collapse justify-content-center"
 					id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<ul class="navbar-nav mx-auto">
+						<li class="nav-item mr-5">
+						    <a class="mainlink nav-link" href="/information_aquarium">이용 안내</a>
+						</li>
 						<li class="nav-item dropdown mr-5"><a
-							class="nav-link dropdown-toggle" href="#" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">
-								방문 전 정보 </a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="/information">이용 안내</a></li>
-								<li><hr class="dropdown-divider" /></li>
-								<li><a class="dropdown-item" href="/noticeBoard">공지사항</a></li>
-							</ul></li>
-						<li class="nav-item dropdown mr-5"><a
-							class="nav-link dropdown-toggle" href="#" role="button"
+							class="mainlink nav-link dropdown-toggle" href="#" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false">
 								아쿠아리움 소개 </a>
 							<ul class="dropdown-menu">
@@ -76,7 +73,7 @@
 								<li><a class="dropdown-item" href="/introducing_program">프로그램 소개</a></li>
 							</ul></li>
 						<li class="nav-item dropdown mr-5"><a
-							class="nav-link dropdown-toggle" href="#" role="button"
+							class="mainlink nav-link dropdown-toggle" href="#" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false">
 								온라인 예매 </a>
 							<ul class="dropdown-menu">
@@ -85,21 +82,21 @@
 								<li><a class="dropdown-item" href="/reserveConfirm">예약확인</a></li>
 							</ul></li>
 						<li class="nav-item dropdown mr-5"><a
-							class="nav-link dropdown-toggle" href="#" role="button"
+							class="mainlink nav-link dropdown-toggle" href="#" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false">
 								굿즈샵 </a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">구매하기</a></li>
+								<li><a class="dropdown-item" href="/itemMain">구매하기</a></li>
 								<li><hr class="dropdown-divider" /></li>
-								<li><a class="dropdown-item" href="#">구매정보</a></li>
+								<li><a class="dropdown-item" href="/orderInfo">구매정보</a></li>
 							</ul></li>
 					</ul>
 				</div>
-				<div th:if="${session.loginSession == null}" class="ml-auto">
+				<div th:if="${session.loginSession == null}" class="ml-auto" id="loginStatus" data-logged-in="false">
 					<a href="/login" class="login">로그인</a> 
 				</div>
 				<div th:if="${session.loginSession != null}"
-					class="ml-auto">
+					class="ml-auto" id="loginStatus" data-logged-in="true">
 					<span th:text="${session.loginSession.memberName}+'님, 환영합니다.'"></span><br>
 					<a href="/MyInfo" class="login">개인정보 수정</a><br>
 					<a href="/logout" class="login">로그아웃</a>
@@ -107,6 +104,7 @@
 			</div>
 		</nav>
 	</header>
+
 
     <!--   내용    -->
     <style>
@@ -202,15 +200,24 @@
     
     <script>
 	    $(document).ready(function() {
-	        $('#cancelButton').click(function() {
-	            var checkedBoxes = $('input[name="reservNo"]:checked'); // name이 reservNo인 체크박스의 체크가 되어있는것들을 가져오기
-	            if (checkedBoxes.length === 0) {
-	                alert("취소할 예약을 선택하세요.");
-	                return;
-	            }
-	
-	            $('#reservForm').attr('action', '/deleteReservation'); // action 값 변경
-	            $('#reservForm').submit();
+	        
+	    	$('#cancelButton').click(function() {
+	        	var loginStatusDiv = document.getElementById("loginStatus");
+	    		var isLoggedIn = loginStatusDiv.getAttribute("data-logged-in") === "true";
+	    		
+	    		if (isLoggedIn) {
+		            var checkedBoxes = $('input[name="reservNo"]:checked'); // name이 reservNo인 체크박스의 체크가 되어있는것들을 가져오기
+		            if (checkedBoxes.length === 0) {
+		                alert("취소할 예약을 선택하세요.");
+		                return;
+		            }
+		
+		            $('#reservForm').attr('action', '/deleteReservation'); // action 값 변경
+		            $('#reservForm').submit();
+	    		} else {
+	    			alert("로그인을 먼저 해주세요");
+	    			window.location.href = "/login"; // 로그인 페이지로 리다이렉트
+	    		}
 	        });
 	    });
 	</script>
