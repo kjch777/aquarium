@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.camel.project.dto.Login;
 import com.camel.project.dto.Member;
 import com.camel.project.mapper.MemberMapper;
 
@@ -68,9 +69,9 @@ public class MemberService {
 	}
     	
 	//회원정보 수정
-	public void updateMember(Member member) {
+	public void updateMember(Login login) {
 		
-		memberMapper.updateMember(member);
+		memberMapper.updateMember(login);
 	}
 	
 	//회원 탈퇴
